@@ -11,6 +11,10 @@ jobs:
     - uses: actions/setup-python@v4
       with:
         python-version: '3.11'
+    - uses: awalsh128/cache-apt-pkgs-action@v1.2.2
+      with:
+        packages: pandoc
+        version: 1.0
     - name: build.py
       run: python build.py
     - uses: burnett01/rsync-deployments@5.2.1
