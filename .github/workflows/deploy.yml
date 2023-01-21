@@ -1,0 +1,23 @@
+on:
+  push:
+    branches:
+    - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    - name: build.py
+      run: python build.py
+    - uses: burnett01/rsync-deployments@5.2.1
+      with:
+        switches: -avzr --delete
+        path: _build/
+        remote_path: /var/www/recipes.gashkov.com/
+        remote_host: 188.166.108.138
+        remote_user: root
+        remote_key: ${{ secrets.REMOTE_KEY_SSH_PRIVATE }}
