@@ -1,4 +1,5 @@
 import pathlib
+import shutil
 import subprocess
 import sys
 
@@ -23,6 +24,8 @@ def main():
                 "commonmark",
                 "--to",
                 "html",
+                "--css",
+                "../styles.css",
                 "--standalone",
                 "--output",
                 output,
@@ -44,6 +47,8 @@ def main():
             "commonmark",
             "--to",
             "html",
+            "--css",
+            "styles.css",
             "--standalone",
             "--output",
             root / "_build" / "index.html"
@@ -54,6 +59,8 @@ def main():
         stderr=sys.stderr,
         check=True,
     )
+
+    shutil.copy(root / "styles.css", root / "_build" / "styles.css")
 
 
 
