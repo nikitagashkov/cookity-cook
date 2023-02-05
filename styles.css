@@ -4,12 +4,8 @@
 
 .ingredients {
     border-radius: 6px;
-    background-color: #d6e1f7;
+    background-color: #f1f1f1;
     padding: 1ex;
-}
-
-th {
-    border-top: none !important;
 }
 
 /* defaults styles below */
