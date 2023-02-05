@@ -1,17 +1,34 @@
+import itertools
 import pathlib
 import shutil
 import subprocess
 import sys
+from typing import NamedTuple
 
 root = pathlib.Path(__file__).parent
 
 
+class Recipe(NamedTuple):
+    relative_path: pathlib.Path
+    title: str
+
+
 def main():
-    relative_links = []
+    recipes = []
 
     for path in root.glob("recipes/**/*.md"):
+        with path.open("r") as fd:
+            first_line = fd.readline()
+            title = first_line.removeprefix("#").strip() or path.stem.replace("-", " ").strip().capitalize()
+
         relative_path = path.relative_to(root / "recipes")
-        relative_links.append(str(relative_path.with_suffix(".html")))
+
+        recipes.append(
+            Recipe(
+                relative_path=relative_path.with_suffix(".html"),
+                title=title,
+            )
+        )
 
         output = root / "_build" / relative_path.with_suffix(".html")
         output.parent.mkdir(exist_ok=True, parents=True)
@@ -35,10 +52,17 @@ def main():
             check=True,
         )
 
-    index_md = ""
+    categories = []
 
-    for path in sorted(relative_links):
-        index_md += f"* [{path}]({path})\n"
+    for _, recipes in itertools.groupby(recipes, key=lambda r: r.relative_path.parts[0]):
+        category = []
+
+        for recipe in recipes:
+            category.append(f"* [{recipe.title}]({str(recipe.relative_path)})\n")
+
+        categories.append("".join(sorted(category)))
+
+    index_md = "<hr/>\n".join(categories)
 
     subprocess.run(
         [
@@ -61,7 +85,6 @@ def main():
     )
 
     shutil.copy(root / "styles.css", root / "_build" / "styles.css")
-
 
 
 if __name__ == "__main__":
