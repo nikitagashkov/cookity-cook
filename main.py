@@ -2,7 +2,7 @@ import pathlib
 import random
 
 root = pathlib.Path(__file__).parent
-breakfasts = [l for l in root.glob("recipes/breakfasts/*.md")]
+breakfasts = [b for b in root.glob("recipes/breakfasts/*.md")]
 lunches = [l for l in root.glob("recipes/lunches/*.md")]
 dinners = [d for d in root.glob("recipes/dinners/*.md")]
 
