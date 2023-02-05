@@ -38,7 +38,7 @@ def main():
                 "pandoc",
                 path.absolute(),
                 "--from",
-                "commonmark",
+                "commonmark+pipe_tables",
                 "--to",
                 "html",
                 "--css",
@@ -69,7 +69,7 @@ def main():
         [
             "pandoc",
             "--from",
-            "commonmark",
+            "commonmark+pipe_tables",
             "--to",
             "html",
             "--css",

@@ -2,6 +2,18 @@
     display: none;
 }
 
+.ingredients {
+    border-radius: 6px;
+    background-color: #d6e1f7;
+    padding: 1ex;
+}
+
+th {
+    border-top: none !important;
+}
+
+/* defaults styles below */
+
 html {
     line-height: 1.5;
     font-family: Georgia, serif;
