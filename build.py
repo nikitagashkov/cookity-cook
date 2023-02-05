@@ -63,7 +63,7 @@ def main():
 
         categories.append("".join(sorted(category)))
 
-    index_md = "---\n".join(categories)
+    index_md = "# Рецепты\n" + "---\n".join(categories)
 
     subprocess.run(
         [
