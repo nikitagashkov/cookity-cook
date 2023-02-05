@@ -44,6 +44,10 @@ def main():
                 "--css",
                 "../styles.css",
                 "--standalone",
+                "--metadata",
+                "title",
+                " = ",
+                title,
                 "--output",
                 output,
             ],
@@ -62,7 +66,7 @@ def main():
 
         categories.append("".join(sorted(category)))
 
-    index_md = "<hr/>\n".join(categories)
+    index_md = "---\n".join(categories)
 
     subprocess.run(
         [
@@ -75,6 +79,10 @@ def main():
             "styles.css",
             "--standalone",
             "--output",
+            "--metadata",
+            "title",
+            " = ",
+            "Рецепты ◆ recipes.gashkov.com",
             root / "_build" / "index.html"
         ],
         input=index_md,
