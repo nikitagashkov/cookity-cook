@@ -1,4 +1,4 @@
-# Жареный рис
+# (∙) Жареный рис
 
 https://www.youtube.com/watch?v=BS8EZcW8mAY
 
